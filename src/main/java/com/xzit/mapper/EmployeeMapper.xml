@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Employee" >
+    <id column="employeeid" property="employeeid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="employeeNo" property="employeeno" jdbcType="VARCHAR" />
+    <result column="departmentId" property="departmentid" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="privilege" property="privilege" jdbcType="VARCHAR" />
+    <result column="mobileNumber" property="mobilenumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    employeeid, name, employeeNo, departmentId, password, privilege, mobileNumber
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.EmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.EmployeeExample" >
+    delete from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Employee" >
+    insert into employee (employeeid, name, employeeNo, 
+      departmentId, password, privilege, 
+      mobileNumber)
+    values (#{employeeid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{employeeno,jdbcType=VARCHAR}, 
+      #{departmentid,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{privilege,jdbcType=VARCHAR}, 
+      #{mobilenumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Employee" >
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="employeeid != null" >
+        employeeid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="employeeno != null" >
+        employeeNo,
+      </if>
+      <if test="departmentid != null" >
+        departmentId,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="privilege != null" >
+        privilege,
+      </if>
+      <if test="mobilenumber != null" >
+        mobileNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeno != null" >
+        #{employeeno,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null" >
+        #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilenumber != null" >
+        #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.EmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update employee
+    <set >
+      <if test="record.employeeid != null" >
+        employeeid = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeno != null" >
+        employeeNo = #{record.employeeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentid != null" >
+        departmentId = #{record.departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privilege != null" >
+        privilege = #{record.privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilenumber != null" >
+        mobileNumber = #{record.mobilenumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update employee
+    set employeeid = #{record.employeeid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      employeeNo = #{record.employeeno,jdbcType=VARCHAR},
+      departmentId = #{record.departmentid,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      privilege = #{record.privilege,jdbcType=VARCHAR},
+      mobileNumber = #{record.mobilenumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Employee" >
+    update employee
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeno != null" >
+        employeeNo = #{employeeno,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        departmentId = #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null" >
+        privilege = #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilenumber != null" >
+        mobileNumber = #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Employee" >
+    update employee
+    set name = #{name,jdbcType=VARCHAR},
+      employeeNo = #{employeeno,jdbcType=VARCHAR},
+      departmentId = #{departmentid,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      privilege = #{privilege,jdbcType=VARCHAR},
+      mobileNumber = #{mobilenumber,jdbcType=VARCHAR}
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllEmployee" resultType="com.xzit.entity.EmployeeAndDEpartment">
+    select employeeid, name, employeeNo, employee.departmentId, password, privilege, mobileNumber,departmentName
+    from employee,department
+    where employee.departmentId = department.departmentId
+    <if test="edp.employeeNo != null and edp.employeeNo !=''" >
+      and employeeNo like concat('%',#{edp.employeeNo,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="edp.name != null and edp.name !=''" >
+      and name like concat('%',#{edp.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="edp.departmentId != null" >
+      and employee.departmentId = #{edp.departmentId,jdbcType=INTEGER}
+    </if>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalAllEmployee" resultType="java.lang.Integer">
+    select COUNT(*)
+    from employee,department
+    where employee.departmentId = department.departmentId
+    <if test="edp.employeeNo != null and edp.employeeNo !=''" >
+      and employeeNo like concat('%',#{edp.employeeNo,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="edp.name != null and edp.name !=''" >
+      and name like concat('%',#{edp.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="edp.departmentId != null" >
+      and employee.departmentId = #{edp.departmentId,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <update id="updateEmployee">
+    update employee
+    <set >
+      <if test="edp.name != null" >
+        name = #{edp.name,jdbcType=VARCHAR},
+      </if>
+      <if test="edp.employeeNo != null" >
+        employeeNo = #{edp.employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="edp.departmentId != null" >
+        departmentId = #{edp.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="edp.password != null" >
+        password = #{edp.password,jdbcType=VARCHAR},
+      </if>
+      <if test="edp.privilege != null" >
+        privilege = #{edp.privilege,jdbcType=VARCHAR},
+      </if>
+      mobileNumber = #{edp.mobileNumber,jdbcType=VARCHAR}
+    </set>
+    where employeeid = #{edp.employeeid,jdbcType=INTEGER}
+  </update>
+
+  <select id="totalAllEmployee2" resultType="java.lang.Integer">
+    SELECT  count(*) from employee
+    where employeeNo = #{edp.employeeNo,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteEmployee" parameterType="int">
+    delete from employee where employeeid=#{employeeid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="addEmployee">
+    insert into employee ( name, employeeNo, departmentId, password, privilege, mobileNumber)
+    values (#{edp.name,jdbcType=VARCHAR}, #{edp.employeeNo,jdbcType=VARCHAR}, #{edp.departmentId,jdbcType=INTEGER},
+    #{edp.password,jdbcType=VARCHAR}, #{edp.privilege,jdbcType=VARCHAR}, #{edp.mobileNumber,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="modifyPasswordInfo">
+    update employee
+    <set >
+      <if test="em.password != null" >
+        password = #{em.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  employeeNo = #{em.employeeno,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

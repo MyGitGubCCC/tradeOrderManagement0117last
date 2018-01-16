@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Department" >
+    <id column="departmentId" property="departmentid" jdbcType="INTEGER" />
+    <result column="departmentNo" property="departmentno" jdbcType="VARCHAR" />
+    <result column="departmentName" property="departmentname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    departmentId, departmentNo, departmentName, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.DepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from department
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.DepartmentExample" >
+    delete from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Department" >
+    insert into department (departmentId, departmentNo, departmentName, 
+      description)
+    values (#{departmentid,jdbcType=INTEGER}, #{departmentno,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Department" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        departmentId,
+      </if>
+      <if test="departmentno != null" >
+        departmentNo,
+      </if>
+      <if test="departmentname != null" >
+        departmentName,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="departmentno != null" >
+        #{departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.DepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update department
+    <set >
+      <if test="record.departmentid != null" >
+        departmentId = #{record.departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentno != null" >
+        departmentNo = #{record.departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentname != null" >
+        departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update department
+    set departmentId = #{record.departmentid,jdbcType=INTEGER},
+      departmentNo = #{record.departmentno,jdbcType=VARCHAR},
+      departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Department" >
+    update department
+    <set >
+      <if test="departmentno != null" >
+        departmentNo = #{departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        departmentName = #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Department" >
+    update department
+    set departmentNo = #{departmentno,jdbcType=VARCHAR},
+      departmentName = #{departmentname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectDepartment" resultMap="BaseResultMap">
+    SELECT * from department
+    <where>
+      <if test="de.departmentname != null and de.departmentname !=''" >
+        and departmentName like concat('%',#{de.departmentname,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="de.departmentno != null and de.departmentno !=''" >
+        and departmentNo like concat('%',#{de.departmentno,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalDepartment" resultType="java.lang.Integer">
+    SELECT  count(*) from department
+    <where>
+      <if test="de.departmentname != null and de.departmentname !=''" >
+        and departmentName like concat('%',#{de.departmentname,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="de.departmentno != null and de.departmentno !=''" >
+        and departmentNo like concat('%',#{de.departmentno,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteDepartment" parameterType="int">
+    delete from department where departmentId=#{departmentid,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateDepartment">
+    update department
+    <set >
+      <if test="de.departmentno != null" >
+        departmentNo = #{de.departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="de.departmentname != null" >
+        departmentName = #{de.departmentname,jdbcType=VARCHAR},
+      </if>
+      description = #{de.description,jdbcType=VARCHAR}
+    </set>
+    where departmentId = #{de.departmentid,jdbcType=INTEGER}
+  </update>
+
+  <insert id="addDepartment" >
+    insert into department (departmentNo, departmentName,description)
+    values (#{de.departmentno,jdbcType=VARCHAR}, #{de.departmentname,jdbcType=VARCHAR},
+    #{de.description,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="totalDepartment2" resultType="java.lang.Integer">
+    SELECT  count(*) from department
+    where departmentNo =#{de.departmentno,jdbcType=VARCHAR}
+  </select>
+
+  <select id="allDepartment" resultMap="BaseResultMap">
+    SELECT * from department
+  </select>
+</mapper>

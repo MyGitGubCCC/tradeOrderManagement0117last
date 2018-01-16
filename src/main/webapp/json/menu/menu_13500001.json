@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1356,
+    "pid": 13500001,
+    "state": "open",
+    "iconCls": "",
+    "text": "部门信息",
+    "url": "departmentlist.action"
+  },
+  {
+    "id": 1356,
+    "pid": 13500001,
+    "state": "open",
+    "iconCls": "",
+    "text": "员工信息",
+    "url": "employeelist.action"
+  }, {
+  "id": 1356,
+  "pid": 13500001,
+  "state": "open",
+  "iconCls": "",
+  "text": "支付方式",
+  "url": "paymentMethod.action"
+}, {
+  "id": 1356,
+  "pid": 13500001,
+  "state": "open",
+  "iconCls": "",
+  "text": "会员",
+  "url": "member.action"
+}, {
+    "id": 1356,
+    "pid": 13500001,
+    "state": "open",
+    "iconCls": "",
+    "text": "配送方式",
+    "url": "distributionmode.action"
+  }
+]

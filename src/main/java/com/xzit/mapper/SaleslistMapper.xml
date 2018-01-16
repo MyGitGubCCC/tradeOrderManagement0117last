@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.SaleslistMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Saleslist" >
+    <id column="salesListId" property="saleslistid" jdbcType="INTEGER" />
+    <result column="employeeid" property="employeeid" jdbcType="INTEGER" />
+    <result column="purchaseUnitId" property="purchaseunitid" jdbcType="INTEGER" />
+    <result column="commodityId" property="commodityid" jdbcType="INTEGER" />
+    <result column="receivingPartyId" property="receivingpartyid" jdbcType="INTEGER" />
+    <result column="creditlimitId" property="creditlimitid" jdbcType="INTEGER" />
+    <result column="distributionModeId" property="distributionmodeid" jdbcType="INTEGER" />
+    <result column="paymentMethodId" property="paymentmethodid" jdbcType="INTEGER" />
+    <result column="applyTransferFormId" property="applytransferformid" jdbcType="INTEGER" />
+    <result column="due" property="due" jdbcType="VARCHAR" />
+    <result column="expressFee" property="expressfee" jdbcType="VARCHAR" />
+    <result column="orderTime" property="ordertime" jdbcType="VARCHAR" />
+    <result column="orderStatus1" property="orderstatus1" jdbcType="VARCHAR" />
+    <result column="buyerNo" property="buyerno" jdbcType="VARCHAR" />
+    <result column="consigneeNo" property="consigneeno" jdbcType="VARCHAR" />
+    <result column="deliveryMethodNo" property="deliverymethodno" jdbcType="VARCHAR" />
+    <result column="paymentMethodNo" property="paymentmethodno" jdbcType="VARCHAR" />
+    <result column="expectDeliveryDate" property="expectdeliverydate" jdbcType="VARCHAR" />
+    <result column="actualPayment" property="actualpayment" jdbcType="VARCHAR" />
+    <result column="actualPaymentCapital" property="actualpaymentcapital" jdbcType="VARCHAR" />
+    <result column="paymentTime" property="paymenttime" jdbcType="VARCHAR" />
+    <result column="formTime" property="formtime" jdbcType="VARCHAR" />
+    <result column="orderStatus2" property="orderstatus2" jdbcType="VARCHAR" />
+    <result column="Notes" property="notes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    salesListId, employeeid, purchaseUnitId, commodityId, receivingPartyId, creditlimitId, 
+    distributionModeId, paymentMethodId, applyTransferFormId, due, expressFee, orderTime, 
+    orderStatus1, buyerNo, consigneeNo, deliveryMethodNo, paymentMethodNo, expectDeliveryDate, 
+    actualPayment, actualPaymentCapital, paymentTime, formTime, orderStatus2, Notes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.SaleslistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from saleslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saleslist
+    where salesListId = #{saleslistid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from saleslist
+    where salesListId = #{saleslistid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.SaleslistExample" >
+    delete from saleslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Saleslist" >
+    insert into saleslist (salesListId, employeeid, purchaseUnitId, 
+      commodityId, receivingPartyId, creditlimitId, 
+      distributionModeId, paymentMethodId, applyTransferFormId, 
+      due, expressFee, orderTime, 
+      orderStatus1, buyerNo, consigneeNo, 
+      deliveryMethodNo, paymentMethodNo, expectDeliveryDate, 
+      actualPayment, actualPaymentCapital, paymentTime, 
+      formTime, orderStatus2, Notes
+      )
+    values (#{saleslistid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{purchaseunitid,jdbcType=INTEGER}, 
+      #{commodityid,jdbcType=INTEGER}, #{receivingpartyid,jdbcType=INTEGER}, #{creditlimitid,jdbcType=INTEGER}, 
+      #{distributionmodeid,jdbcType=INTEGER}, #{paymentmethodid,jdbcType=INTEGER}, #{applytransferformid,jdbcType=INTEGER}, 
+      #{due,jdbcType=VARCHAR}, #{expressfee,jdbcType=VARCHAR}, #{ordertime,jdbcType=VARCHAR}, 
+      #{orderstatus1,jdbcType=VARCHAR}, #{buyerno,jdbcType=VARCHAR}, #{consigneeno,jdbcType=VARCHAR}, 
+      #{deliverymethodno,jdbcType=VARCHAR}, #{paymentmethodno,jdbcType=VARCHAR}, #{expectdeliverydate,jdbcType=VARCHAR}, 
+      #{actualpayment,jdbcType=VARCHAR}, #{actualpaymentcapital,jdbcType=VARCHAR}, #{paymenttime,jdbcType=VARCHAR}, 
+      #{formtime,jdbcType=VARCHAR}, #{orderstatus2,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Saleslist" >
+    insert into saleslist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saleslistid != null" >
+        salesListId,
+      </if>
+      <if test="employeeid != null" >
+        employeeid,
+      </if>
+      <if test="purchaseunitid != null" >
+        purchaseUnitId,
+      </if>
+      <if test="commodityid != null" >
+        commodityId,
+      </if>
+      <if test="receivingpartyid != null" >
+        receivingPartyId,
+      </if>
+      <if test="creditlimitid != null" >
+        creditlimitId,
+      </if>
+      <if test="distributionmodeid != null" >
+        distributionModeId,
+      </if>
+      <if test="paymentmethodid != null" >
+        paymentMethodId,
+      </if>
+      <if test="applytransferformid != null" >
+        applyTransferFormId,
+      </if>
+      <if test="due != null" >
+        due,
+      </if>
+      <if test="expressfee != null" >
+        expressFee,
+      </if>
+      <if test="ordertime != null" >
+        orderTime,
+      </if>
+      <if test="orderstatus1 != null" >
+        orderStatus1,
+      </if>
+      <if test="buyerno != null" >
+        buyerNo,
+      </if>
+      <if test="consigneeno != null" >
+        consigneeNo,
+      </if>
+      <if test="deliverymethodno != null" >
+        deliveryMethodNo,
+      </if>
+      <if test="paymentmethodno != null" >
+        paymentMethodNo,
+      </if>
+      <if test="expectdeliverydate != null" >
+        expectDeliveryDate,
+      </if>
+      <if test="actualpayment != null" >
+        actualPayment,
+      </if>
+      <if test="actualpaymentcapital != null" >
+        actualPaymentCapital,
+      </if>
+      <if test="paymenttime != null" >
+        paymentTime,
+      </if>
+      <if test="formtime != null" >
+        formTime,
+      </if>
+      <if test="orderstatus2 != null" >
+        orderStatus2,
+      </if>
+      <if test="notes != null" >
+        Notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saleslistid != null" >
+        #{saleslistid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseunitid != null" >
+        #{purchaseunitid,jdbcType=INTEGER},
+      </if>
+      <if test="commodityid != null" >
+        #{commodityid,jdbcType=INTEGER},
+      </if>
+      <if test="receivingpartyid != null" >
+        #{receivingpartyid,jdbcType=INTEGER},
+      </if>
+      <if test="creditlimitid != null" >
+        #{creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="distributionmodeid != null" >
+        #{distributionmodeid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentmethodid != null" >
+        #{paymentmethodid,jdbcType=INTEGER},
+      </if>
+      <if test="applytransferformid != null" >
+        #{applytransferformid,jdbcType=INTEGER},
+      </if>
+      <if test="due != null" >
+        #{due,jdbcType=VARCHAR},
+      </if>
+      <if test="expressfee != null" >
+        #{expressfee,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus1 != null" >
+        #{orderstatus1,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerno != null" >
+        #{buyerno,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeno != null" >
+        #{consigneeno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverymethodno != null" >
+        #{deliverymethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentmethodno != null" >
+        #{paymentmethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="expectdeliverydate != null" >
+        #{expectdeliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="actualpayment != null" >
+        #{actualpayment,jdbcType=VARCHAR},
+      </if>
+      <if test="actualpaymentcapital != null" >
+        #{actualpaymentcapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paymenttime != null" >
+        #{paymenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="formtime != null" >
+        #{formtime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus2 != null" >
+        #{orderstatus2,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.SaleslistExample" resultType="java.lang.Integer" >
+    select count(*) from saleslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update saleslist
+    <set >
+      <if test="record.saleslistid != null" >
+        salesListId = #{record.saleslistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeid != null" >
+        employeeid = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.purchaseunitid != null" >
+        purchaseUnitId = #{record.purchaseunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityid != null" >
+        commodityId = #{record.commodityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.receivingpartyid != null" >
+        receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditlimitid != null" >
+        creditlimitId = #{record.creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.distributionmodeid != null" >
+        distributionModeId = #{record.distributionmodeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentmethodid != null" >
+        paymentMethodId = #{record.paymentmethodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.applytransferformid != null" >
+        applyTransferFormId = #{record.applytransferformid,jdbcType=INTEGER},
+      </if>
+      <if test="record.due != null" >
+        due = #{record.due,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressfee != null" >
+        expressFee = #{record.expressfee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordertime != null" >
+        orderTime = #{record.ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstatus1 != null" >
+        orderStatus1 = #{record.orderstatus1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerno != null" >
+        buyerNo = #{record.buyerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consigneeno != null" >
+        consigneeNo = #{record.consigneeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverymethodno != null" >
+        deliveryMethodNo = #{record.deliverymethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentmethodno != null" >
+        paymentMethodNo = #{record.paymentmethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectdeliverydate != null" >
+        expectDeliveryDate = #{record.expectdeliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualpayment != null" >
+        actualPayment = #{record.actualpayment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualpaymentcapital != null" >
+        actualPaymentCapital = #{record.actualpaymentcapital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymenttime != null" >
+        paymentTime = #{record.paymenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formtime != null" >
+        formTime = #{record.formtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstatus2 != null" >
+        orderStatus2 = #{record.orderstatus2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        Notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update saleslist
+    set salesListId = #{record.saleslistid,jdbcType=INTEGER},
+      employeeid = #{record.employeeid,jdbcType=INTEGER},
+      purchaseUnitId = #{record.purchaseunitid,jdbcType=INTEGER},
+      commodityId = #{record.commodityid,jdbcType=INTEGER},
+      receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER},
+      creditlimitId = #{record.creditlimitid,jdbcType=INTEGER},
+      distributionModeId = #{record.distributionmodeid,jdbcType=INTEGER},
+      paymentMethodId = #{record.paymentmethodid,jdbcType=INTEGER},
+      applyTransferFormId = #{record.applytransferformid,jdbcType=INTEGER},
+      due = #{record.due,jdbcType=VARCHAR},
+      expressFee = #{record.expressfee,jdbcType=VARCHAR},
+      orderTime = #{record.ordertime,jdbcType=VARCHAR},
+      orderStatus1 = #{record.orderstatus1,jdbcType=VARCHAR},
+      buyerNo = #{record.buyerno,jdbcType=VARCHAR},
+      consigneeNo = #{record.consigneeno,jdbcType=VARCHAR},
+      deliveryMethodNo = #{record.deliverymethodno,jdbcType=VARCHAR},
+      paymentMethodNo = #{record.paymentmethodno,jdbcType=VARCHAR},
+      expectDeliveryDate = #{record.expectdeliverydate,jdbcType=VARCHAR},
+      actualPayment = #{record.actualpayment,jdbcType=VARCHAR},
+      actualPaymentCapital = #{record.actualpaymentcapital,jdbcType=VARCHAR},
+      paymentTime = #{record.paymenttime,jdbcType=VARCHAR},
+      formTime = #{record.formtime,jdbcType=VARCHAR},
+      orderStatus2 = #{record.orderstatus2,jdbcType=VARCHAR},
+      Notes = #{record.notes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Saleslist" >
+    update saleslist
+    <set >
+      <if test="employeeid != null" >
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseunitid != null" >
+        purchaseUnitId = #{purchaseunitid,jdbcType=INTEGER},
+      </if>
+      <if test="commodityid != null" >
+        commodityId = #{commodityid,jdbcType=INTEGER},
+      </if>
+      <if test="receivingpartyid != null" >
+        receivingPartyId = #{receivingpartyid,jdbcType=INTEGER},
+      </if>
+      <if test="creditlimitid != null" >
+        creditlimitId = #{creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="distributionmodeid != null" >
+        distributionModeId = #{distributionmodeid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentmethodid != null" >
+        paymentMethodId = #{paymentmethodid,jdbcType=INTEGER},
+      </if>
+      <if test="applytransferformid != null" >
+        applyTransferFormId = #{applytransferformid,jdbcType=INTEGER},
+      </if>
+      <if test="due != null" >
+        due = #{due,jdbcType=VARCHAR},
+      </if>
+      <if test="expressfee != null" >
+        expressFee = #{expressfee,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        orderTime = #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus1 != null" >
+        orderStatus1 = #{orderstatus1,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerno != null" >
+        buyerNo = #{buyerno,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeno != null" >
+        consigneeNo = #{consigneeno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverymethodno != null" >
+        deliveryMethodNo = #{deliverymethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentmethodno != null" >
+        paymentMethodNo = #{paymentmethodno,jdbcType=VARCHAR},
+      </if>
+      <if test="expectdeliverydate != null" >
+        expectDeliveryDate = #{expectdeliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="actualpayment != null" >
+        actualPayment = #{actualpayment,jdbcType=VARCHAR},
+      </if>
+      <if test="actualpaymentcapital != null" >
+        actualPaymentCapital = #{actualpaymentcapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paymenttime != null" >
+        paymentTime = #{paymenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="formtime != null" >
+        formTime = #{formtime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus2 != null" >
+        orderStatus2 = #{orderstatus2,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        Notes = #{notes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where salesListId = #{saleslistid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Saleslist" >
+    update saleslist
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      purchaseUnitId = #{purchaseunitid,jdbcType=INTEGER},
+      commodityId = #{commodityid,jdbcType=INTEGER},
+      receivingPartyId = #{receivingpartyid,jdbcType=INTEGER},
+      creditlimitId = #{creditlimitid,jdbcType=INTEGER},
+      distributionModeId = #{distributionmodeid,jdbcType=INTEGER},
+      paymentMethodId = #{paymentmethodid,jdbcType=INTEGER},
+      applyTransferFormId = #{applytransferformid,jdbcType=INTEGER},
+      due = #{due,jdbcType=VARCHAR},
+      expressFee = #{expressfee,jdbcType=VARCHAR},
+      orderTime = #{ordertime,jdbcType=VARCHAR},
+      orderStatus1 = #{orderstatus1,jdbcType=VARCHAR},
+      buyerNo = #{buyerno,jdbcType=VARCHAR},
+      consigneeNo = #{consigneeno,jdbcType=VARCHAR},
+      deliveryMethodNo = #{deliverymethodno,jdbcType=VARCHAR},
+      paymentMethodNo = #{paymentmethodno,jdbcType=VARCHAR},
+      expectDeliveryDate = #{expectdeliverydate,jdbcType=VARCHAR},
+      actualPayment = #{actualpayment,jdbcType=VARCHAR},
+      actualPaymentCapital = #{actualpaymentcapital,jdbcType=VARCHAR},
+      paymentTime = #{paymenttime,jdbcType=VARCHAR},
+      formTime = #{formtime,jdbcType=VARCHAR},
+      orderStatus2 = #{orderstatus2,jdbcType=VARCHAR},
+      Notes = #{notes,jdbcType=VARCHAR}
+    where salesListId = #{saleslistid,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="selectOtherEntity" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+  </resultMap>
+
+  <select id="selectAllSaleslist" resultMap="selectOtherEntity">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalSaleslist" resultType="java.lang.Integer">
+  SELECT count(*) FROM saleslist
+  <where>
+    <if test="rec.consigneeno != null" >
+      and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+    </if>
+  </where>
+</select>
+
+
+  <resultMap id="selectOtherEntityXiaohsou" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey2"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeid"/>
+  </resultMap>
+
+  <select id="selectAllSaleslistXiaohsou" resultMap="selectOtherEntityXiaohsou">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <!--<choose>
+        <when test="rec.orderstatus2 == '2'">
+          and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+          <choose>
+            <when test="rec.orderstatus2 == '1'">
+              and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+              <choose>
+                <when test="rec.orderstatus2 > '2'">
+                  and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+                </when>
+              </choose>
+            </otherwise>
+          </choose>
+        </otherwise>
+      </choose>-->
+        and orderStatus2 = '2'
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalSaleslistXiaohsou" resultType="java.lang.Integer">
+    SELECT count(*) FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <!--<choose>
+        <when test="rec.orderstatus2 == '2'">
+          and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+          <choose>
+            <when test="rec.orderstatus2 == '1'">
+              and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+              <choose>
+                <when test="rec.orderstatus2 > '2'">
+                  and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+                </when>
+              </choose>
+            </otherwise>
+          </choose>
+        </otherwise>
+      </choose>-->
+      and orderStatus2 = '2'
+    </where>
+  </select>
+
+
+  <select id="saleslistxiaoshouComplete" resultMap="selectOtherEntityCheckCreditlimit">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      and orderStatus2 = '1'
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalsaleslistxiaoshouComplete" resultType="java.lang.Integer">
+    SELECT count(*) FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+        and orderStatus2 = '1'
+    </where>
+  </select>
+
+  <select id="saleslistxiaoshouManager" resultMap="selectOtherEntityXiaohsou">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      and orderStatus2 > '2'
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalsaleslistxiaoshouManager" resultType="java.lang.Integer">
+    SELECT count(*) FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      and orderStatus2 > '2'
+    </where>
+  </select>
+
+  <!--流程中的查询-->
+  <resultMap id="selectOtherEntityCheckSaleslist" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey2"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeid"/>
+  </resultMap>
+
+  <select id="selectAllCheckSaleslist" resultMap="selectOtherEntityCheckSaleslist">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalCheckSaleslist" resultType="java.lang.Integer">
+    SELECT count(*) FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+
+  <!--流程中的查询，审核客户信用额度时，多一张客户信用额度表-->
+  <resultMap id="selectOtherEntityCheckCreditlimit" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey3"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeid"/>
+  </resultMap>
+
+  <select id="selectAllCheckCreditlimit" resultMap="selectOtherEntityCheckCreditlimit">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="totalCheckCreditlimit" resultType="java.lang.Integer">
+    SELECT count(*) FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+
+
+  <!--流程中多一个调拨申请表-->
+  <resultMap id="selectOtherEntityApplyForm" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+
+    <association property="applytransferform"
+                 javaType="com.xzit.entity.Applytransferform"
+                 select="com.xzit.mapper.ApplytransferformMapper.selectByPrimaryKey"
+                 column="applyTransferFormId"/>
+
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey3"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeid"/>
+  </resultMap>
+
+  <select id="selectAllApplyForm" resultMap="selectOtherEntityApplyForm">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+
+  <!--流程中多一个配拨单-->
+  <resultMap id="selectOtherEntityAllocationlist" type="com.xzit.entity.Saleslist" extends="BaseResultMap">
+
+    <association property="applytransferform"
+                 javaType="com.xzit.entity.Applytransferform"
+                 select="com.xzit.mapper.ApplytransferformMapper.selectByPrimaryKey2"
+                 column="applyTransferFormId"/>
+
+    <association property="purchaseunit"
+                 javaType="com.xzit.entity.Purchaseunit"
+                 select="com.xzit.mapper.PurchaseunitMapper.selectByPrimaryKey3"
+                 column="purchaseUnitId"/>
+    <association property="commodity"
+                 javaType="com.xzit.entity.Commodity"
+                 select="com.xzit.mapper.CommodityMapper.selectByPrimaryKey"
+                 column="commodityId"/>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"/>
+    <association property="distributionmode"
+                 javaType="com.xzit.entity.Distributionmode"
+                 select="com.xzit.mapper.DistributionmodeMapper.selectByPrimaryKey"
+                 column="distributionModeId"/>
+    <association property="paymentmethod"
+                 javaType="com.xzit.entity.Paymentmethod"
+                 select="com.xzit.mapper.PaymentmethodMapper.selectByPrimaryKey"
+                 column="paymentMethodId"/>
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeid"/>
+  </resultMap>
+
+  <select id="selectAllAllocationlist" resultMap="selectOtherEntityAllocationlist">
+    SELECT * FROM saleslist
+    <where>
+      <if test="rec.consigneeno != null" >
+        and consigneeNo LIKE concat('%',#{rec.consigneeno,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="rec.orderstatus1 != null and rec.orderstatus1 != ''">
+        and orderStatus1 = #{rec.orderstatus1,jdbcType=VARCHAR}
+      </if>
+      and orderStatus2 = #{rec.orderstatus2,jdbcType=VARCHAR}
+    </where>
+    limit #{page,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllSalasList" resultMap="selectOtherEntityXiaohsou" parameterType="com.xzit.entity.SaleslistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from saleslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectInfoByPrimaryKey" resultMap="selectOtherEntity" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saleslist
+    where salesListId = #{saleslistid,jdbcType=INTEGER}
+  </select>
+</mapper>

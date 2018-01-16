@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.AllocationlistMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Allocationlist" >
+    <id column="allocationlistId" property="allocationlistid" jdbcType="INTEGER" />
+    <result column="allocationlistNo" property="allocationlistno" jdbcType="VARCHAR" />
+    <result column="employeeid" property="employeeid" jdbcType="INTEGER" />
+    <result column="salesListId" property="saleslistid" jdbcType="INTEGER" />
+    <result column="employeeName" property="employeename" jdbcType="VARCHAR" />
+    <result column="allocationTime" property="allocationtime" jdbcType="VARCHAR" />
+    <result column="allocationStatue" property="allocationstatue" jdbcType="VARCHAR" />
+    <result column="checkemployeeid" property="checkemployeeid" jdbcType="INTEGER" />
+    <result column="checkName" property="checkname" jdbcType="VARCHAR" />
+    <result column="checkTime" property="checktime" jdbcType="VARCHAR" />
+    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
+    <result column="commodityPrice" property="commodityprice" jdbcType="VARCHAR" />
+    <result column="ammount" property="ammount" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="allocationopinion" property="allocationopinion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    allocationlistId, allocationlistNo, employeeid, salesListId, employeeName, allocationTime, 
+    allocationStatue, checkemployeeid, checkName, checkTime, commodityName, commodityPrice, 
+    ammount, description, allocationopinion
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.AllocationlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from allocationlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from allocationlist
+    where allocationlistId = #{allocationlistid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from allocationlist
+    where allocationlistId = #{allocationlistid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.AllocationlistExample" >
+    delete from allocationlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Allocationlist" >
+    insert into allocationlist (allocationlistId, allocationlistNo, 
+      employeeid, salesListId, employeeName, 
+      allocationTime, allocationStatue, checkemployeeid, 
+      checkName, checkTime, commodityName, 
+      commodityPrice, ammount, description, 
+      allocationopinion)
+    values (#{allocationlistid,jdbcType=INTEGER}, #{allocationlistno,jdbcType=VARCHAR}, 
+      #{employeeid,jdbcType=INTEGER}, #{saleslistid,jdbcType=INTEGER}, #{employeename,jdbcType=VARCHAR}, 
+      #{allocationtime,jdbcType=VARCHAR}, #{allocationstatue,jdbcType=VARCHAR}, #{checkemployeeid,jdbcType=INTEGER}, 
+      #{checkname,jdbcType=VARCHAR}, #{checktime,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR}, 
+      #{commodityprice,jdbcType=VARCHAR}, #{ammount,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{allocationopinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="allocationlistid"  parameterType="com.xzit.entity.Allocationlist" >
+    insert into allocationlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="allocationlistid != null" >
+        allocationlistId,
+      </if>
+      <if test="allocationlistno != null" >
+        allocationlistNo,
+      </if>
+      <if test="employeeid != null" >
+        employeeid,
+      </if>
+      <if test="saleslistid != null" >
+        salesListId,
+      </if>
+      <if test="employeename != null" >
+        employeeName,
+      </if>
+      <if test="allocationtime != null" >
+        allocationTime,
+      </if>
+      <if test="allocationstatue != null" >
+        allocationStatue,
+      </if>
+      <if test="checkemployeeid != null" >
+        checkemployeeid,
+      </if>
+      <if test="checkname != null" >
+        checkName,
+      </if>
+      <if test="checktime != null" >
+        checkTime,
+      </if>
+      <if test="commodityname != null" >
+        commodityName,
+      </if>
+      <if test="commodityprice != null" >
+        commodityPrice,
+      </if>
+      <if test="ammount != null" >
+        ammount,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="allocationopinion != null" >
+        allocationopinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="allocationlistid != null" >
+        #{allocationlistid,jdbcType=INTEGER},
+      </if>
+      <if test="allocationlistno != null" >
+        #{allocationlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="saleslistid != null" >
+        #{saleslistid,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null" >
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationtime != null" >
+        #{allocationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationstatue != null" >
+        #{allocationstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkemployeeid != null" >
+        #{checkemployeeid,jdbcType=INTEGER},
+      </if>
+      <if test="checkname != null" >
+        #{checkname,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        #{commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="ammount != null" >
+        #{ammount,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationopinion != null" >
+        #{allocationopinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.AllocationlistExample" resultType="java.lang.Integer" >
+    select count(*) from allocationlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update allocationlist
+    <set >
+      <if test="record.allocationlistid != null" >
+        allocationlistId = #{record.allocationlistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.allocationlistno != null" >
+        allocationlistNo = #{record.allocationlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeid != null" >
+        employeeid = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleslistid != null" >
+        salesListId = #{record.saleslistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeename != null" >
+        employeeName = #{record.employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allocationtime != null" >
+        allocationTime = #{record.allocationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allocationstatue != null" >
+        allocationStatue = #{record.allocationstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkemployeeid != null" >
+        checkemployeeid = #{record.checkemployeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkname != null" >
+        checkName = #{record.checkname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checktime != null" >
+        checkTime = #{record.checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityname != null" >
+        commodityName = #{record.commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityprice != null" >
+        commodityPrice = #{record.commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ammount != null" >
+        ammount = #{record.ammount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allocationopinion != null" >
+        allocationopinion = #{record.allocationopinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update allocationlist
+    set allocationlistId = #{record.allocationlistid,jdbcType=INTEGER},
+      allocationlistNo = #{record.allocationlistno,jdbcType=VARCHAR},
+      employeeid = #{record.employeeid,jdbcType=INTEGER},
+      salesListId = #{record.saleslistid,jdbcType=INTEGER},
+      employeeName = #{record.employeename,jdbcType=VARCHAR},
+      allocationTime = #{record.allocationtime,jdbcType=VARCHAR},
+      allocationStatue = #{record.allocationstatue,jdbcType=VARCHAR},
+      checkemployeeid = #{record.checkemployeeid,jdbcType=INTEGER},
+      checkName = #{record.checkname,jdbcType=VARCHAR},
+      checkTime = #{record.checktime,jdbcType=VARCHAR},
+      commodityName = #{record.commodityname,jdbcType=VARCHAR},
+      commodityPrice = #{record.commodityprice,jdbcType=VARCHAR},
+      ammount = #{record.ammount,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      allocationopinion = #{record.allocationopinion,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Allocationlist" >
+    update allocationlist
+    <set >
+      <if test="allocationlistno != null" >
+        allocationlistNo = #{allocationlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null" >
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="saleslistid != null" >
+        salesListId = #{saleslistid,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null" >
+        employeeName = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationtime != null" >
+        allocationTime = #{allocationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationstatue != null" >
+        allocationStatue = #{allocationstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkemployeeid != null" >
+        checkemployeeid = #{checkemployeeid,jdbcType=INTEGER},
+      </if>
+      <if test="checkname != null" >
+        checkName = #{checkname,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        checkTime = #{checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        commodityName = #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        commodityPrice = #{commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="ammount != null" >
+        ammount = #{ammount,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationopinion != null" >
+        allocationopinion = #{allocationopinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where allocationlistId = #{allocationlistid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Allocationlist" >
+    update allocationlist
+    set allocationlistNo = #{allocationlistno,jdbcType=VARCHAR},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      salesListId = #{saleslistid,jdbcType=INTEGER},
+      employeeName = #{employeename,jdbcType=VARCHAR},
+      allocationTime = #{allocationtime,jdbcType=VARCHAR},
+      allocationStatue = #{allocationstatue,jdbcType=VARCHAR},
+      checkemployeeid = #{checkemployeeid,jdbcType=INTEGER},
+      checkName = #{checkname,jdbcType=VARCHAR},
+      checkTime = #{checktime,jdbcType=VARCHAR},
+      commodityName = #{commodityname,jdbcType=VARCHAR},
+      commodityPrice = #{commodityprice,jdbcType=VARCHAR},
+      ammount = #{ammount,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      allocationopinion = #{allocationopinion,jdbcType=VARCHAR}
+    where allocationlistId = #{allocationlistid,jdbcType=INTEGER}
+  </update>
+</mapper>

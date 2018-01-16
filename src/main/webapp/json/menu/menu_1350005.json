@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1356,
+    "pid": 1350005,
+    "state": "open",
+    "iconCls": "",
+    "text": "审核信用额度",
+    "url": "checkCreditlimitlist.action"
+  }
+]

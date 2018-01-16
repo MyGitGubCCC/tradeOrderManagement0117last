@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.ReceivingpartyMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Receivingparty" >
+    <id column="receivingPartyId" property="receivingpartyid" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="detailedAddress" property="detailedaddress" jdbcType="VARCHAR" />
+    <result column="postalCode" property="postalcode" jdbcType="VARCHAR" />
+    <result column="receiptName" property="receiptname" jdbcType="VARCHAR" />
+    <result column="phoneNumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    receivingPartyId, province, city, county, street, detailedAddress, postalCode, receiptName, 
+    phoneNumber, telephone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.ReceivingpartyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from receivingparty
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from receivingparty
+    where receivingPartyId = #{receivingpartyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from receivingparty
+    where receivingPartyId = #{receivingpartyid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.ReceivingpartyExample" >
+    delete from receivingparty
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Receivingparty" >
+    insert into receivingparty (receivingPartyId, province, city, 
+      county, street, detailedAddress, 
+      postalCode, receiptName, phoneNumber, 
+      telephone)
+    values (#{receivingpartyid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{county,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, #{detailedaddress,jdbcType=VARCHAR}, 
+      #{postalcode,jdbcType=VARCHAR}, #{receiptname,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Receivingparty" >
+    insert into receivingparty
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="receivingpartyid != null" >
+        receivingPartyId,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="street != null" >
+        street,
+      </if>
+      <if test="detailedaddress != null" >
+        detailedAddress,
+      </if>
+      <if test="postalcode != null" >
+        postalCode,
+      </if>
+      <if test="receiptname != null" >
+        receiptName,
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="receivingpartyid != null" >
+        #{receivingpartyid,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedaddress != null" >
+        #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptname != null" >
+        #{receiptname,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.ReceivingpartyExample" resultType="java.lang.Integer" >
+    select count(*) from receivingparty
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update receivingparty
+    <set >
+      <if test="record.receivingpartyid != null" >
+        receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.county != null" >
+        county = #{record.county,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null" >
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailedaddress != null" >
+        detailedAddress = #{record.detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalcode != null" >
+        postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptname != null" >
+        receiptName = #{record.receiptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update receivingparty
+    set receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      county = #{record.county,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      detailedAddress = #{record.detailedaddress,jdbcType=VARCHAR},
+      postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      receiptName = #{record.receiptname,jdbcType=VARCHAR},
+      phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Receivingparty" >
+    update receivingparty
+    <set >
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedaddress != null" >
+        detailedAddress = #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        postalCode = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptname != null" >
+        receiptName = #{receiptname,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where receivingPartyId = #{receivingpartyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Receivingparty" >
+    update receivingparty
+    set province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      detailedAddress = #{detailedaddress,jdbcType=VARCHAR},
+      postalCode = #{postalcode,jdbcType=VARCHAR},
+      receiptName = #{receiptname,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR}
+    where receivingPartyId = #{receivingpartyid,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertReceivingparty" useGeneratedKeys="true" keyProperty="receivingpartyid" parameterType="com.xzit.entity.Receivingparty" >
+    insert into receivingparty (province, city,
+    county, street, detailedAddress,
+    postalCode, receiptName, phoneNumber,
+    telephone)
+    values (#{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+    #{county,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, #{detailedaddress,jdbcType=VARCHAR},
+    #{postalcode,jdbcType=VARCHAR}, #{receiptname,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR},
+    #{telephone,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

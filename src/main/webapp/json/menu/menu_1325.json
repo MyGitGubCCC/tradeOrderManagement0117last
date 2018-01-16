@@ -1,0 +1,88 @@
+[
+  {
+    "id": 13500001,
+    "pid": 1325,
+    "text": "基础信息",
+    "state": "closed",
+    "iconCls": "fa fa-heartbeat",
+    "url": ""
+  },
+  {
+    "id": 1350001,
+    "pid": 1325,
+    "text": "buc01_填写订货单",
+    "state": "closed",
+    "iconCls": "fa fa-heartbeat",
+    "url": ""
+  },{
+  "id": 1350002,
+  "pid": 1325,
+  "text": "buc02_提交销售清单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350003,
+  "pid": 1325,
+  "text": "buc03_签核销售申请单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350004,
+  "pid": 1325,
+  "text": "buc04_签注客户信用额度",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350005,
+  "pid": 1325,
+  "text": "buc05_审核客户信用额度",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350006,
+  "pid": 1325,
+  "text": "buc06_调配",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350007,
+  "pid": 1325,
+  "text": "buc07_签具调拨申请",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350008,
+  "pid": 1325,
+  "text": "buc08_填制配拨单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 1350009,
+  "pid": 1325,
+  "text": "buc_09审核配拨单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 13500010,
+  "pid": 1325,
+  "text": "buc10_提交送货单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+},{
+  "id": 13500011,
+  "pid": 1325,
+  "text": "buc11_提交托运单",
+  "state": "closed",
+  "iconCls": "fa fa-heartbeat",
+  "url": ""
+}
+]

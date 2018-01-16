@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.ConsignmentlistMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Consignmentlist" >
+    <id column="consignmentListId" property="consignmentlistid" jdbcType="INTEGER" />
+    <result column="consignmentListNo" property="consignmentlistno" jdbcType="VARCHAR" />
+    <result column="employeeId" property="employeeid" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="waybillNumber" property="waybillnumber" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="receivingPartyId" property="receivingpartyid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapConsigmentVo" type="com.xzit.entity.Consignmentlist" extends="BaseResultMap">
+    <association property="employee"
+                 javaType="com.xzit.entity.Employee"
+                 select="com.xzit.mapper.EmployeeMapper.selectByPrimaryKey"
+                 column="employeeId"
+                 fetchType="eager"></association>
+    <association property="receivingparty"
+                 javaType="com.xzit.entity.Receivingparty"
+                 select="com.xzit.mapper.ReceivingpartyMapper.selectByPrimaryKey"
+                 column="receivingPartyId"
+                 fetchType="eager"></association>
+  </resultMap>
+
+  <select id="selectReceivingPartyIdByWaybillNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select saleslist.receivingPartyId from deliverynote,saleslist
+where  deliverynote.salesListId = saleslist.salesListId
+and deliverynote.deliveryNoteNo = #{waybillNumber}
+  </select>
+
+  <select id="selectAllConsignmentlist" resultMap="ResultMapConsigmentVo" parameterType="com.xzit.entity.ConsignmentlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from consignmentlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    consignmentListId, consignmentListNo, employeeId, weight, size, number, waybillNumber, 
+    unit, receivingPartyId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.ConsignmentlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from consignmentlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from consignmentlist
+    where consignmentListId = #{consignmentlistid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from consignmentlist
+    where consignmentListId = #{consignmentlistid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.ConsignmentlistExample" >
+    delete from consignmentlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Consignmentlist" >
+    insert into consignmentlist (consignmentListId, consignmentListNo, 
+      employeeId, weight, size, 
+      number, waybillNumber, unit, 
+      receivingPartyId)
+    values (#{consignmentlistid,jdbcType=INTEGER}, #{consignmentlistno,jdbcType=VARCHAR}, 
+      #{employeeid,jdbcType=INTEGER}, #{weight,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{number,jdbcType=VARCHAR}, #{waybillnumber,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{receivingpartyid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Consignmentlist" >
+    insert into consignmentlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="consignmentlistid != null" >
+        consignmentListId,
+      </if>
+      <if test="consignmentlistno != null" >
+        consignmentListNo,
+      </if>
+      <if test="employeeid != null" >
+        employeeId,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="waybillnumber != null" >
+        waybillNumber,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="receivingpartyid != null" >
+        receivingPartyId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="consignmentlistid != null" >
+        #{consignmentlistid,jdbcType=INTEGER},
+      </if>
+      <if test="consignmentlistno != null" >
+        #{consignmentlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillnumber != null" >
+        #{waybillnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingpartyid != null" >
+        #{receivingpartyid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.ConsignmentlistExample" resultType="java.lang.Integer" >
+    select count(*) from consignmentlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update consignmentlist
+    <set >
+      <if test="record.consignmentlistid != null" >
+        consignmentListId = #{record.consignmentlistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.consignmentlistno != null" >
+        consignmentListNo = #{record.consignmentlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeid != null" >
+        employeeId = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waybillnumber != null" >
+        waybillNumber = #{record.waybillnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivingpartyid != null" >
+        receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update consignmentlist
+    set consignmentListId = #{record.consignmentlistid,jdbcType=INTEGER},
+      consignmentListNo = #{record.consignmentlistno,jdbcType=VARCHAR},
+      employeeId = #{record.employeeid,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      waybillNumber = #{record.waybillnumber,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      receivingPartyId = #{record.receivingpartyid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Consignmentlist" >
+    update consignmentlist
+    <set >
+      <if test="consignmentlistno != null" >
+        consignmentListNo = #{consignmentlistno,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null" >
+        employeeId = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillnumber != null" >
+        waybillNumber = #{waybillnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingpartyid != null" >
+        receivingPartyId = #{receivingpartyid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where consignmentListId = #{consignmentlistid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Consignmentlist" >
+    update consignmentlist
+    set consignmentListNo = #{consignmentlistno,jdbcType=VARCHAR},
+      employeeId = #{employeeid,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      waybillNumber = #{waybillnumber,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      receivingPartyId = #{receivingpartyid,jdbcType=INTEGER}
+    where consignmentListId = #{consignmentlistid,jdbcType=INTEGER}
+  </update>
+</mapper>

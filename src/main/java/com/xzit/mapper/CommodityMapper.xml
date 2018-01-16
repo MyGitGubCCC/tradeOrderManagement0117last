@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.CommodityMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Commodity" >
+    <id column="commodityId" property="commodityid" jdbcType="INTEGER" />
+    <result column="commodityNo" property="commodityno" jdbcType="VARCHAR" />
+    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="commodityPrice" property="commodityprice" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="ammount" property="ammount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    commodityId, commodityNo, commodityName, specification, commodityPrice, description, 
+    ammount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.CommodityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodityId = #{commodityid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity
+    where commodityId = #{commodityid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.CommodityExample" >
+    delete from commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Commodity" >
+    insert into commodity (commodityId, commodityNo, commodityName, 
+      specification, commodityPrice, description, 
+      ammount)
+    values (#{commodityid,jdbcType=INTEGER}, #{commodityno,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{commodityprice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{ammount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Commodity" >
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityid != null" >
+        commodityId,
+      </if>
+      <if test="commodityno != null" >
+        commodityNo,
+      </if>
+      <if test="commodityname != null" >
+        commodityName,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="commodityprice != null" >
+        commodityPrice,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="ammount != null" >
+        ammount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityid != null" >
+        #{commodityid,jdbcType=INTEGER},
+      </if>
+      <if test="commodityno != null" >
+        #{commodityno,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        #{commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ammount != null" >
+        #{ammount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.CommodityExample" resultType="java.lang.Integer" >
+    select count(*) from commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodity
+    <set >
+      <if test="record.commodityid != null" >
+        commodityId = #{record.commodityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityno != null" >
+        commodityNo = #{record.commodityno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityname != null" >
+        commodityName = #{record.commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityprice != null" >
+        commodityPrice = #{record.commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ammount != null" >
+        ammount = #{record.ammount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodity
+    set commodityId = #{record.commodityid,jdbcType=INTEGER},
+      commodityNo = #{record.commodityno,jdbcType=VARCHAR},
+      commodityName = #{record.commodityname,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      commodityPrice = #{record.commodityprice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      ammount = #{record.ammount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Commodity" >
+    update commodity
+    <set >
+      <if test="commodityno != null" >
+        commodityNo = #{commodityno,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        commodityName = #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        commodityPrice = #{commodityprice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ammount != null" >
+        ammount = #{ammount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodityId = #{commodityid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Commodity" >
+    update commodity
+    set commodityNo = #{commodityno,jdbcType=VARCHAR},
+      commodityName = #{commodityname,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      commodityPrice = #{commodityprice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      ammount = #{ammount,jdbcType=VARCHAR}
+    where commodityId = #{commodityid,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertCommodity" useGeneratedKeys="true" keyProperty="commodityid" parameterType="com.xzit.entity.Commodity" >
+    insert into commodity ( commodityNo, commodityName,
+    specification, commodityPrice, description,ammount)
+    values (#{commodityno,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR},
+    #{specification,jdbcType=VARCHAR}, #{commodityprice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+    #{ammount,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

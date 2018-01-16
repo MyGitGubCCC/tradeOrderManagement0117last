@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.CreditlimitMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Creditlimit" >
+    <id column="creditlimitId" property="creditlimitid" jdbcType="INTEGER" />
+    <result column="finalreviewDate" property="finalreviewdate" jdbcType="VARCHAR" />
+    <result column="Auditaccountingname" property="auditaccountingname" jdbcType="VARCHAR" />
+    <result column="Customername" property="customername" jdbcType="VARCHAR" />
+    <result column="Creditsituationdescription" property="creditsituationdescription" jdbcType="VARCHAR" />
+    <result column="Customeraddressdescription" property="customeraddressdescription" jdbcType="VARCHAR" />
+    <result column="CustomerID" property="customerid" jdbcType="INTEGER" />
+    <result column="Intercoursetime" property="intercoursetime" jdbcType="VARCHAR" />
+    <result column="Descriptionpaymentipast" property="descriptionpaymentipast" jdbcType="VARCHAR" />
+    <result column="Customercapital" property="customercapital" jdbcType="VARCHAR" />
+    <result column="MarketingdepartmentaccountID" property="marketingdepartmentaccountid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    creditlimitId, finalreviewDate, Auditaccountingname, Customername, Creditsituationdescription, 
+    Customeraddressdescription, CustomerID, Intercoursetime, Descriptionpaymentipast, 
+    Customercapital, MarketingdepartmentaccountID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.CreditlimitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from creditlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from creditlimit
+    where creditlimitId = #{creditlimitid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from creditlimit
+    where creditlimitId = #{creditlimitid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.CreditlimitExample" >
+    delete from creditlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Creditlimit" >
+    insert into creditlimit (creditlimitId, finalreviewDate, Auditaccountingname, 
+      Customername, Creditsituationdescription, 
+      Customeraddressdescription, CustomerID, 
+      Intercoursetime, Descriptionpaymentipast, 
+      Customercapital, MarketingdepartmentaccountID
+      )
+    values (#{creditlimitid,jdbcType=INTEGER}, #{finalreviewdate,jdbcType=VARCHAR}, #{auditaccountingname,jdbcType=VARCHAR}, 
+      #{customername,jdbcType=VARCHAR}, #{creditsituationdescription,jdbcType=VARCHAR}, 
+      #{customeraddressdescription,jdbcType=VARCHAR}, #{customerid,jdbcType=INTEGER}, 
+      #{intercoursetime,jdbcType=VARCHAR}, #{descriptionpaymentipast,jdbcType=VARCHAR}, 
+      #{customercapital,jdbcType=VARCHAR}, #{marketingdepartmentaccountid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Creditlimit" >
+    insert into creditlimit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditlimitid != null" >
+        creditlimitId,
+      </if>
+      <if test="finalreviewdate != null" >
+        finalreviewDate,
+      </if>
+      <if test="auditaccountingname != null" >
+        Auditaccountingname,
+      </if>
+      <if test="customername != null" >
+        Customername,
+      </if>
+      <if test="creditsituationdescription != null" >
+        Creditsituationdescription,
+      </if>
+      <if test="customeraddressdescription != null" >
+        Customeraddressdescription,
+      </if>
+      <if test="customerid != null" >
+        CustomerID,
+      </if>
+      <if test="intercoursetime != null" >
+        Intercoursetime,
+      </if>
+      <if test="descriptionpaymentipast != null" >
+        Descriptionpaymentipast,
+      </if>
+      <if test="customercapital != null" >
+        Customercapital,
+      </if>
+      <if test="marketingdepartmentaccountid != null" >
+        MarketingdepartmentaccountID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditlimitid != null" >
+        #{creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="finalreviewdate != null" >
+        #{finalreviewdate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditaccountingname != null" >
+        #{auditaccountingname,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="creditsituationdescription != null" >
+        #{creditsituationdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddressdescription != null" >
+        #{customeraddressdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="intercoursetime != null" >
+        #{intercoursetime,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionpaymentipast != null" >
+        #{descriptionpaymentipast,jdbcType=VARCHAR},
+      </if>
+      <if test="customercapital != null" >
+        #{customercapital,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingdepartmentaccountid != null" >
+        #{marketingdepartmentaccountid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.CreditlimitExample" resultType="java.lang.Integer" >
+    select count(*) from creditlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update creditlimit
+    <set >
+      <if test="record.creditlimitid != null" >
+        creditlimitId = #{record.creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.finalreviewdate != null" >
+        finalreviewDate = #{record.finalreviewdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditaccountingname != null" >
+        Auditaccountingname = #{record.auditaccountingname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customername != null" >
+        Customername = #{record.customername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditsituationdescription != null" >
+        Creditsituationdescription = #{record.creditsituationdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customeraddressdescription != null" >
+        Customeraddressdescription = #{record.customeraddressdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerid != null" >
+        CustomerID = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.intercoursetime != null" >
+        Intercoursetime = #{record.intercoursetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionpaymentipast != null" >
+        Descriptionpaymentipast = #{record.descriptionpaymentipast,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customercapital != null" >
+        Customercapital = #{record.customercapital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketingdepartmentaccountid != null" >
+        MarketingdepartmentaccountID = #{record.marketingdepartmentaccountid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update creditlimit
+    set creditlimitId = #{record.creditlimitid,jdbcType=INTEGER},
+      finalreviewDate = #{record.finalreviewdate,jdbcType=VARCHAR},
+      Auditaccountingname = #{record.auditaccountingname,jdbcType=VARCHAR},
+      Customername = #{record.customername,jdbcType=VARCHAR},
+      Creditsituationdescription = #{record.creditsituationdescription,jdbcType=VARCHAR},
+      Customeraddressdescription = #{record.customeraddressdescription,jdbcType=VARCHAR},
+      CustomerID = #{record.customerid,jdbcType=INTEGER},
+      Intercoursetime = #{record.intercoursetime,jdbcType=VARCHAR},
+      Descriptionpaymentipast = #{record.descriptionpaymentipast,jdbcType=VARCHAR},
+      Customercapital = #{record.customercapital,jdbcType=VARCHAR},
+      MarketingdepartmentaccountID = #{record.marketingdepartmentaccountid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Creditlimit" >
+    update creditlimit
+    <set >
+      <if test="finalreviewdate != null" >
+        finalreviewDate = #{finalreviewdate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditaccountingname != null" >
+        Auditaccountingname = #{auditaccountingname,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        Customername = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="creditsituationdescription != null" >
+        Creditsituationdescription = #{creditsituationdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddressdescription != null" >
+        Customeraddressdescription = #{customeraddressdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        CustomerID = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="intercoursetime != null" >
+        Intercoursetime = #{intercoursetime,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionpaymentipast != null" >
+        Descriptionpaymentipast = #{descriptionpaymentipast,jdbcType=VARCHAR},
+      </if>
+      <if test="customercapital != null" >
+        Customercapital = #{customercapital,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingdepartmentaccountid != null" >
+        MarketingdepartmentaccountID = #{marketingdepartmentaccountid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where creditlimitId = #{creditlimitid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Creditlimit" >
+    update creditlimit
+    set finalreviewDate = #{finalreviewdate,jdbcType=VARCHAR},
+      Auditaccountingname = #{auditaccountingname,jdbcType=VARCHAR},
+      Customername = #{customername,jdbcType=VARCHAR},
+      Creditsituationdescription = #{creditsituationdescription,jdbcType=VARCHAR},
+      Customeraddressdescription = #{customeraddressdescription,jdbcType=VARCHAR},
+      CustomerID = #{customerid,jdbcType=INTEGER},
+      Intercoursetime = #{intercoursetime,jdbcType=VARCHAR},
+      Descriptionpaymentipast = #{descriptionpaymentipast,jdbcType=VARCHAR},
+      Customercapital = #{customercapital,jdbcType=VARCHAR},
+      MarketingdepartmentaccountID = #{marketingdepartmentaccountid,jdbcType=VARCHAR}
+    where creditlimitId = #{creditlimitid,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <insert id="insertCreditlimitInfo"  useGeneratedKeys="true" keyProperty="creditlimitid"  parameterType="com.xzit.entity.Creditlimit" >
+    insert into creditlimit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditlimitid != null" >
+        creditlimitId,
+      </if>
+      <if test="finalreviewdate != null" >
+        finalreviewDate,
+      </if>
+      <if test="auditaccountingname != null" >
+        Auditaccountingname,
+      </if>
+      <if test="customername != null" >
+        Customername,
+      </if>
+      <if test="creditsituationdescription != null" >
+        Creditsituationdescription,
+      </if>
+      <if test="customeraddressdescription != null" >
+        Customeraddressdescription,
+      </if>
+      <if test="customerid != null" >
+        CustomerID,
+      </if>
+      <if test="intercoursetime != null" >
+        Intercoursetime,
+      </if>
+      <if test="descriptionpaymentipast != null" >
+        Descriptionpaymentipast,
+      </if>
+      <if test="customercapital != null" >
+        Customercapital,
+      </if>
+      <if test="marketingdepartmentaccountid != null" >
+        MarketingdepartmentaccountID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditlimitid != null" >
+        #{creditlimitid,jdbcType=INTEGER},
+      </if>
+      <if test="finalreviewdate != null" >
+        #{finalreviewdate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditaccountingname != null" >
+        #{auditaccountingname,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="creditsituationdescription != null" >
+        #{creditsituationdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddressdescription != null" >
+        #{customeraddressdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="intercoursetime != null" >
+        #{intercoursetime,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionpaymentipast != null" >
+        #{descriptionpaymentipast,jdbcType=VARCHAR},
+      </if>
+      <if test="customercapital != null" >
+        #{customercapital,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingdepartmentaccountid != null" >
+        #{marketingdepartmentaccountid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

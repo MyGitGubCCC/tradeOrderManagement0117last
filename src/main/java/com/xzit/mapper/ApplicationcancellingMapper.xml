@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzit.mapper.ApplicationcancellingMapper" >
+  <resultMap id="BaseResultMap" type="com.xzit.entity.Applicationcancelling" >
+    <id column="applicationCancellingId" property="applicationcancellingid" jdbcType="INTEGER" />
+    <result column="consignmentListId" property="consignmentlistid" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="changeSequenceNumber" property="changesequencenumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    applicationCancellingId, consignmentListId, date, reason, changeSequenceNumber
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzit.entity.ApplicationcancellingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from applicationcancelling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from applicationcancelling
+    where applicationCancellingId = #{applicationcancellingid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from applicationcancelling
+    where applicationCancellingId = #{applicationcancellingid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzit.entity.ApplicationcancellingExample" >
+    delete from applicationcancelling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzit.entity.Applicationcancelling" >
+    insert into applicationcancelling (applicationCancellingId, consignmentListId, 
+      date, reason, changeSequenceNumber
+      )
+    values (#{applicationcancellingid,jdbcType=INTEGER}, #{consignmentlistid,jdbcType=INTEGER}, 
+      #{date,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{changesequencenumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzit.entity.Applicationcancelling" >
+    insert into applicationcancelling
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applicationcancellingid != null" >
+        applicationCancellingId,
+      </if>
+      <if test="consignmentlistid != null" >
+        consignmentListId,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="changesequencenumber != null" >
+        changeSequenceNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applicationcancellingid != null" >
+        #{applicationcancellingid,jdbcType=INTEGER},
+      </if>
+      <if test="consignmentlistid != null" >
+        #{consignmentlistid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="changesequencenumber != null" >
+        #{changesequencenumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzit.entity.ApplicationcancellingExample" resultType="java.lang.Integer" >
+    select count(*) from applicationcancelling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update applicationcancelling
+    <set >
+      <if test="record.applicationcancellingid != null" >
+        applicationCancellingId = #{record.applicationcancellingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.consignmentlistid != null" >
+        consignmentListId = #{record.consignmentlistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changesequencenumber != null" >
+        changeSequenceNumber = #{record.changesequencenumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update applicationcancelling
+    set applicationCancellingId = #{record.applicationcancellingid,jdbcType=INTEGER},
+      consignmentListId = #{record.consignmentlistid,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      changeSequenceNumber = #{record.changesequencenumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzit.entity.Applicationcancelling" >
+    update applicationcancelling
+    <set >
+      <if test="consignmentlistid != null" >
+        consignmentListId = #{consignmentlistid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="changesequencenumber != null" >
+        changeSequenceNumber = #{changesequencenumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where applicationCancellingId = #{applicationcancellingid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzit.entity.Applicationcancelling" >
+    update applicationcancelling
+    set consignmentListId = #{consignmentlistid,jdbcType=INTEGER},
+      date = #{date,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      changeSequenceNumber = #{changesequencenumber,jdbcType=VARCHAR}
+    where applicationCancellingId = #{applicationcancellingid,jdbcType=INTEGER}
+  </update>
+</mapper>

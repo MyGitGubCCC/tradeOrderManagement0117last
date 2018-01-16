@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1356,
+    "pid": 1350002,
+    "state": "open",
+    "iconCls": "",
+    "text": "提交销售清单",
+    "url": "saleslistXiaoshou.action"
+  },
+  {
+  "id": 1356,
+  "pid": 1350002,
+  "state": "open",
+  "iconCls": "",
+  "text": "流程中销售清单",
+  "url": "saleslistxiaoshouManager.action"
+  },
+  {
+  "id": 1356,
+  "pid": 1350002,
+  "state": "open",
+  "iconCls": "",
+  "text": "已完成销售清单",
+  "url": "saleslistxiaoshouComplete.action"
+}
+]
